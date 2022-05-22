@@ -6,7 +6,7 @@ urlpatterns = [
     path('products/', views.products, name='products'),
     path('customer/<str:pk>/', views.customer, name='customer'),
 
-    path ('create_order/', views.creatOrder, name="create_order"),
+    path ('create_order/<str:pk>/', views.creatOrder, name="create_order"),
     path ('create_order/<str:pk>/', views.updateOrder, name="update_order"),
     path ('delete_order/<str:pk>/', views.deleteOrder, name="delete_order"),
 ]

@@ -40,9 +40,10 @@ def customer (request, pk):
     context = {'customer': customer, 'order': order, 'total_order': total_order}
     return render (request, 'customer.html', context)
 
-def creatOrder (request):
+def creatOrder (request, pk):
 
-    form = OrderForm()
+    customer = Customer.objects.get(id=pk)
+    form = OrderForm(initial={'customer':customer})
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
