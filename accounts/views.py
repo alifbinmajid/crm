@@ -6,6 +6,7 @@ from django.http import HttpResponse
 
 from .models import Customer, Order, Products
 from .forms import OrderForm
+from .filters import OrderFilter
 
 # Create your views here.
 
@@ -36,8 +37,9 @@ def customer (request, pk):
     customer = Customer.objects.get(id=pk)
     order = customer.order_set.all()
     total_order = order.count()
-
-    context = {'customer': customer, 'order': order, 'total_order': total_order}
+    myFilter = OrderFilter(request.GET, queryset= order)
+    orders = myFilter.qs
+    context = {'customer': customer, 'order': order, 'total_order': total_order, 'myFilter': myFilter}
     return render (request, 'customer.html', context)
 
 def creatOrder (request, pk):
